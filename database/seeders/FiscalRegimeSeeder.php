@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\fiscalRegime;
+use App\Models\FiscalRegime;
 use Illuminate\Database\Seeder;
 
 class FiscalRegimeSeeder extends Seeder
@@ -107,6 +107,6 @@ class FiscalRegimeSeeder extends Seeder
             ]
         ];
 
-        fiscalRegime::insert($data);
+        FiscalRegime::insert($data);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\fiscalType;
+use App\Models\FiscalType;
 use Illuminate\Database\Seeder;
 
 class FiscalTypeSeeder extends Seeder
@@ -18,6 +18,6 @@ class FiscalTypeSeeder extends Seeder
             ],
         ];
 
-        fiscalType::insert($data);
+        FiscalType::insert($data);
     }
 }
