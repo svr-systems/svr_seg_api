@@ -13,8 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(FiscalTypeSeeder::class);
-        $this->call(FiscalRegimeSeeder::class);
         $this->call(UserSeeder::class);
     }
 }

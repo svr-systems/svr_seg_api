@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
       [
         "name" => "ADMIN",
         "email" => "admin@svrmexico.com",
-        "password" => bcrypt("12345678"),
+        "password" => bcrypt("Hondo_1029*"),
         "created_at" => Carbon::now()->format("Y-m-d H:i:s"),
         "updated_at" => Carbon::now()->format("Y-m-d H:i:s"),
       ]
