@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+//LOG
 Route::group([
     'prefix' => 'auth'
 ], function () {
@@ -19,6 +21,12 @@ Route::group([
     );
 });
 
+//AUTH
 Route::group(["middleware" => "auth:api"], function () {
-    
+    //USERS
+    Route::apiResource("users", UserController::class);
+    Route::post("users/password_update", [UserController::class, 'passwordUpdate']);
+
+    //ROLES
+    Route::get("roles", [RoleController::class, 'index']);
 });

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class UserSeeder extends Seeder
 {
@@ -12,14 +12,18 @@ class UserSeeder extends Seeder
   {
     $data = [
       [
-        "name" => "ADMIN",
+        "name" => "SVR",
+        "username" => "ADM-001",
         "email" => "admin@svrmexico.com",
         "password" => bcrypt("Hondo_1029*"),
         "created_at" => Carbon::now()->format("Y-m-d H:i:s"),
         "updated_at" => Carbon::now()->format("Y-m-d H:i:s"),
+        "created_by_id" => 1,
+        "updated_by_id" => 1,
+        "role_id" => 1,
       ]
     ];
 
-    DB::table("users")->insert($data);
+    User::insert($data);
   }
 }

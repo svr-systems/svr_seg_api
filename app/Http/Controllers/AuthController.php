@@ -28,15 +28,14 @@ class AuthController extends Controller
                 "id",
                 "name",
                 "email",
+                "username",
             ]);
 
             return response()->json([
                 "auth" => true,
                 "message" => "Datos de acceso validos",
                 "token" => $token,
-                "id" => $user->id,
-                "name" => $user->name,
-                "email" => $user->email
+                "user" => $user
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
