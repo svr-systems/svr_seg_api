@@ -169,11 +169,11 @@ class UserController extends Controller
         return $data;
     }
 
-    public function passwordUpdate(Request $req)
+    public function pwdUpdate(Request $req)
     {
         DB::beginTransaction();
         try {
-            $user = User::find($req->user_id);
+            $user = User::find($req->id);
             $user->password = bcrypt(trim($req->password));
             $user->updated_by_id = $req->user()->id;
             $user->save();

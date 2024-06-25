@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'auth'
 ], function () {
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('log_in', [AuthController::class, 'logIn']);
 
     Route::group(
         [
             'middleware' => 'auth:api'
         ],
         function () {
-            Route::get('logout', [AuthController::class, 'logout']);
+            Route::get('log_out', [AuthController::class, 'logOut']);
         }
     );
 });
@@ -25,7 +25,7 @@ Route::group([
 Route::group(["middleware" => "auth:api"], function () {
     //USERS
     Route::apiResource("users", UserController::class);
-    Route::post("users/password_update", [UserController::class, 'passwordUpdate']);
+    Route::post("users/pwd_update", [UserController::class, 'pwdUpdate']);
 
     //ROLES
     Route::get("roles", [RoleController::class, 'index']);

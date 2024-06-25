@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login(Request $req)
+    public function logIn(Request $req)
     {
         try {
             if (
@@ -45,7 +45,7 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logOut(Request $request)
     {
         try {
             $request->user()->tokens->each(function ($token, $key) {

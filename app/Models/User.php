@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,6 +18,8 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     static public function getAll($req)
@@ -53,8 +54,15 @@ class User extends Authenticatable
                 'users.username',
                 'users.email',
                 'users.role_id',
-                'roles.name AS role_name'
+                'roles.name AS role_name',
+                'users.created_at',
+                'users.updated_at',
+                'users.created_by_id',
+                'users.updated_by_id',
             ]);
+
+        $data->created_by = User::find($data->created_by_id, ['name']);
+        $data->updated_by = User::find($data->updated_by_id, ['name']);
 
         return $data;
     }
