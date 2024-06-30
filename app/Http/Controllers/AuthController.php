@@ -18,8 +18,9 @@ class AuthController extends Controller
                 ])
             ) {
                 return response()->json([
-                    "auth" => false,
-                    "message" => "Datos de acceso inválidos"
+                    "ok" => false,
+                    "msg" => "Datos de acceso inválidos",
+                    "err" => null
                 ], 200);
             }
 
@@ -32,15 +33,19 @@ class AuthController extends Controller
             ]);
 
             return response()->json([
-                "auth" => true,
-                "message" => "Datos de acceso validos",
-                "token" => $token,
-                "user" => $user
+                "ok" => true,
+                "msg" => "Datos de acceso validos",
+                "data" => [
+                    "auth" => true,
+                    "token" => $token,
+                    "user" => $user
+                ]
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                "auth" => false,
-                "message" => "ERR. " . $th
+                "ok" => false,
+                "msg" => "Error. Contacte al equipo de desarrollo",
+                "err" => "ERROR => " . $th
             ], 200);
         }
     }
@@ -53,13 +58,14 @@ class AuthController extends Controller
             });
 
             return response()->json([
-                "success" => true,
-                "message" => "Sesión finalizada correctamente"
+                "ok" => true,
+                "msg" => "Sesión finalizada correctamente"
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                "success" => false,
-                "message" => "ERR. " . $th
+                "ok" => false,
+                "msg" => "Error. Contacte al equipo de desarrollo",
+                "err" => "ERROR => " . $th
             ], 200);
         }
     }
