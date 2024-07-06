@@ -5,28 +5,26 @@ namespace Database\Seeders;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
-class RoleSeeder extends Seeder
-{
-    public function run()
-    {
-        $data = [
-            [
-              "name" => "ADMINISTRADOR",
-            ],
-            [
-              "name" => "GESTOR",
-            ],
-            [
-              "name" => "EDITOR",
-            ],
-            [
-              "name" => "COMENTARISTA",
-            ],
-            [
-              "name" => "VISOR",
-            ],
-          ];
-      
-          Role::insert($data);
-    }
+class RoleSeeder extends Seeder {
+  public function run() {
+    $data = [
+      [
+        "name" => "ADMINISTRADOR",
+      ],
+      [
+        "name" => "GESTOR",
+      ],
+      [
+        "name" => "EDITOR",
+      ],
+      [
+        "name" => "COMENTARISTA",
+      ],
+      [
+        "name" => "VISOR",
+      ],
+    ];
+
+    Role::insert($data);
+  }
 }

@@ -7,26 +7,26 @@ use Illuminate\Support\Facades\Route;
 
 //LOG
 Route::group([
-    'prefix' => 'auth'
+  'prefix' => 'auth'
 ], function () {
-    Route::post('log_in', [AuthController::class, 'logIn']);
+  Route::post('log_in', [AuthController::class, 'logIn']);
 
-    Route::group(
-        [
-            'middleware' => 'auth:api'
-        ],
-        function () {
-            Route::get('log_out', [AuthController::class, 'logOut']);
-        }
-    );
+  Route::group(
+    [
+      'middleware' => 'auth:api'
+    ],
+    function () {
+      Route::get('log_out', [AuthController::class, 'logOut']);
+    }
+  );
 });
 
 //AUTH
 Route::group(["middleware" => "auth:api"], function () {
-    //USERS
-    Route::apiResource("users", UserController::class);
-    Route::post("users/pwd_update", [UserController::class, 'pwdUpdate']);
+  //USERS
+  Route::apiResource("users", UserController::class);
+  Route::post("users/pwd_update", [UserController::class, 'pwdUpdate']);
 
-    //ROLES
-    Route::get("roles", [RoleController::class, 'index']);
+  //ROLES
+  Route::get("roles", [RoleController::class, 'index']);
 });
