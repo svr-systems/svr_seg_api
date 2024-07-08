@@ -16,6 +16,10 @@ class User extends Authenticatable {
     'remember_token',
   ];
 
+  protected function serializeDate(\DateTimeInterface $date) {
+    return \Carbon\Carbon::instance($date)->toISOString(true);
+  }
+
   protected $casts = [
     'email_verified_at' => 'datetime',
     'created_at' => 'datetime:Y-m-d H:i:s',
