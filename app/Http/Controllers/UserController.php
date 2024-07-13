@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+
 class UserController extends Controller {
   public function index(Request $req) {
     try {
@@ -145,6 +146,7 @@ class UserController extends Controller {
     $data->name = GenController::filter($req->name, "U");
     $data->first_surname = GenController::filter($req->first_surname, "U");
     $data->second_surname = GenController::filter($req->second_surname, "U");
+    $data->avatar = DocMgrController::save($req->file("avatar_doc"), "User");
     $data->nickname = $req->nickname;
     $data->email = $req->email;
     $data->updated_by_id = $req->user()->id;
