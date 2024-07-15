@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\DocMgrController;
 use App\Http\Controllers\GenController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -62,6 +63,7 @@ class User extends Authenticatable {
         'users.name',
         'users.first_surname',
         'users.second_surname',
+        'users.avatar',
         'users.nickname',
         'users.email',
         'users.role_id',
@@ -71,6 +73,9 @@ class User extends Authenticatable {
     $data->created_by = User::find($data->created_by_id, ['name']);
     $data->updated_by = User::find($data->updated_by_id, ['name']);
 
+    $data->avatar_doc = null;
+    $data->avatar_dlt = false;
+    $data->avatar_b64 = DocMgrController::getB64($data->avatar, "User");
     return $data;
   }
 }

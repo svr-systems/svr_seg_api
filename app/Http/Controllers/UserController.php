@@ -146,7 +146,7 @@ class UserController extends Controller {
     $data->name = GenController::filter($req->name, "U");
     $data->first_surname = GenController::filter($req->first_surname, "U");
     $data->second_surname = GenController::filter($req->second_surname, "U");
-    $data->avatar = DocMgrController::save($req->file("avatar_doc"), "User");
+    $data->avatar = DocMgrController::save($req->avatar, $req->file("avatar_doc"), $req->avatar_dlt, "User");
     $data->nickname = $req->nickname;
     $data->email = $req->email;
     $data->updated_by_id = $req->user()->id;

@@ -7,42 +7,50 @@ class GenController extends Controller {
     $v = trim($v);
 
     switch ($type) {
-      case 'id':
-        $v = mb_strtolower($v, 'UTF-8');
-        $v = $v != '' && $v != 'null' && (int) $v > 0 ? (int) $v : null;
+      case "id":
+        $v = mb_strtolower($v, "UTF-8");
+        $v = $v != "" && $v != "null" && (int) $v > 0 ? (int) $v : null;
         break;
-      case 'U':
-        $v = mb_strtoupper($v, 'UTF-8');
-        $v = $v == 'NULL' || $v == '' ? null : $v;
+      case "U":
+        $v = mb_strtoupper($v, "UTF-8");
+        $v = $v == "NULL" || $v == "" ? null : $v;
         break;
-      case 'l':
-        $v = mb_strtolower($v, 'UTF-8');
-        $v = $v == 'null' || $v == '' ? null : $v;
+      case "l":
+        $v = mb_strtolower($v, "UTF-8");
+        $v = $v == "null" || $v == "" ? null : $v;
         break;
-      case 'f':
-        $v = $v != '' ? (float) $v : 0;
+      case "f":
+        $v = $v != "" ? (float) $v : 0;
         break;
-      case 'i':
-        $v = $v != '' ? (int) $v : 0;
+      case "i":
+        $v = $v != "" ? (int) $v : 0;
         break;
-      case 'b':
-        $v = mb_strtolower($v, 'UTF-8');
-        $v = $v === 'null'
+      case "b":
+        $v = mb_strtolower($v, "UTF-8");
+        $v = $v === "null"
           ? null
-          : ($v == '1' || $v == 'true'
+          : ($v == "1" || $v == "true"
             ? true
             : false);
         break;
-      case 't':
-        $v = mb_strtolower($v, 'UTF-8');
-        $v = $v != '' && $v != 'null' && $v != 'undefined' ? $v : null;
+      case "t":
+        $v = mb_strtolower($v, "UTF-8");
+        $v = $v != "" && $v != "null" && $v != "undefined" ? $v : null;
         break;
-      case 'd':
-        $v = mb_strtolower($v, 'UTF-8');
-        $v = $v != '' && $v != 'null' && $v != 'undefined' ? $v : null;
+      case "d":
+        $v = mb_strtolower($v, "UTF-8");
+        $v = $v != "" && $v != "null" && $v != "undefined" ? $v : null;
         break;
     }
 
     return $v;
+  }
+
+  public static function empty($v) {
+    if (empty($v) || mb_strtolower($v, "UTF-8") == "null") {
+      return true;
+    }
+
+    return false;
   }
 }
