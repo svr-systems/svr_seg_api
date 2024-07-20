@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Models\State;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller {
+class StateController extends Controller {
   public function index() {
     try {
       return response()->json([
         "success" => true,
         "message" => "Registros retornados correctamente",
-        "data" => Role::getAll()
+        "data" => State::getAll()
       ], 200);
     } catch (\Throwable $th) {
       return response()->json([
@@ -25,15 +25,15 @@ class RoleController extends Controller {
     //
   }
 
-  public function show(Role $role) {
+  public function show(State $state) {
     //
   }
 
-  public function update(Request $request, Role $role) {
+  public function update(Request $request, State $state) {
     //
   }
 
-  public function destroy(Role $role) {
+  public function destroy(State $state) {
     //
   }
 }

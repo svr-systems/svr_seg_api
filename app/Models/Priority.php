@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model {
+class Priority extends Model {
   use HasFactory;
 
   public $timestamps = false;
 
   static public function getAll() {
-    $data = Role::
+    $data = Priority::
       where('active', true)->
       get([
         'id',
         'name',
+        'color',
       ]);
 
     return $data;

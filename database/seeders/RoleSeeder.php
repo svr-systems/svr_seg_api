@@ -12,16 +12,7 @@ class RoleSeeder extends Seeder {
         "name" => "ADMINISTRADOR",
       ],
       [
-        "name" => "GESTOR",
-      ],
-      [
-        "name" => "EDITOR",
-      ],
-      [
-        "name" => "COMENTARISTA",
-      ],
-      [
-        "name" => "VISOR",
+        "name" => "USUARIO",
       ],
     ];
 
