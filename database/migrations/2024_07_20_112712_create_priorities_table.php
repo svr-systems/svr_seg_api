@@ -10,7 +10,7 @@ class CreatePrioritiesTable extends Migration {
       $table->id();
       $table->boolean("active")->default(true);
       $table->string('name', 30);
-      $table->string('color', 6);
+      $table->string('color', 7);
     });
   }
 

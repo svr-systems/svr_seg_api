@@ -10,27 +10,27 @@ class StateSeeder extends Seeder {
     $data = [
       [
         "name" => "PLANIFICACIÓN",
-        "color" => "1565C0",
+        "color" => "#1565C0",
       ],
       [
         "name" => "EN CURSO",
-        "color" => "FF8F00",
+        "color" => "#FF8F00",
       ],
       [
         "name" => "PAUSADO",
-        "color" => "6A1B9A",
+        "color" => "#6A1B9A",
       ],
       [
         "name" => "LISTO",
-        "color" => "2E7D32",
+        "color" => "#2E7D32",
       ],
       [
         "name" => "PENDIENTE",
-        "color" => "424242",
+        "color" => "#424242",
       ],
       [
         "name" => "CANCELADO",
-        "color" => "C62828",
+        "color" => "#C62828",
       ],
     ];
 

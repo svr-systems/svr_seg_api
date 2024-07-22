@@ -76,6 +76,7 @@ class User extends Authenticatable {
     $data->avatar_doc = null;
     $data->avatar_dlt = false;
     $data->avatar_b64 = DocMgrController::getB64($data->avatar, "User");
+    
     return $data;
   }
 }

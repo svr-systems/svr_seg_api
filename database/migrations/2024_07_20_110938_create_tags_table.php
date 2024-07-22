@@ -13,7 +13,7 @@ class CreateTagsTable extends Migration {
       $table->foreignId("created_by_id")->constrained("users");
       $table->foreignId("updated_by_id")->constrained("users");
       $table->string('name', 30);
-      $table->string('color', 6);
+      $table->string('color', 7);
     });
   }
 

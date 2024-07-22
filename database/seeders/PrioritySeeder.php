@@ -10,15 +10,15 @@ class PrioritySeeder extends Seeder {
     $data = [
       [
         "name" => "BAJA",
-        "color" => "FFF9C4",
+        "color" => "#FFF9C4",
       ],
       [
         "name" => "MEDIA",
-        "color" => "FFD54F",
+        "color" => "#FFD54F",
       ],
       [
         "name" => "ALTA",
-        "color" => "FF6D00",
+        "color" => "#FF6D00",
       ],
     ];
 
