@@ -15,7 +15,7 @@ class UserController extends Controller {
       return response()->json([
         "ok" => true,
         "msg" => "Registros retornados correctamente",
-        "data" => User::getAll($req)
+        "data" => User::getItems($req)
       ], 200);
     } catch (\Throwable $err) {
       return response()->json([
@@ -123,9 +123,11 @@ class UserController extends Controller {
     $rules = [
       "name" => "string|required|min:2|max:50",
       "first_surname" => "string|required|min:2|max:25",
+      "second_surname" => "nullable|string|min:2|max:25",
       "nickname" => "string|required|min:2|max:15|unique:users" . ($id ? ",nickname," . $id : ""),
       "email" => "string|required|min:2|max:50|unique:users" . ($id ? ",email," . $id : ""),
       "role_id" => "numeric|required",
+      "avatar_doc" => "nullable|mimes:jpg,jpeg,png,webp,svg,bmp|max:768",
     ];
 
     if (is_null($id)) {
@@ -143,13 +145,13 @@ class UserController extends Controller {
   }
 
   public function saveData($data, $req) {
+    $data->updated_by_id = $req->user()->id;
     $data->name = GenController::filter($req->name, "U");
     $data->first_surname = GenController::filter($req->first_surname, "U");
     $data->second_surname = GenController::filter($req->second_surname, "U");
     $data->avatar = DocMgrController::save($req->avatar, $req->file("avatar_doc"), $req->avatar_dlt, "User");
     $data->nickname = $req->nickname;
     $data->email = $req->email;
-    $data->updated_by_id = $req->user()->id;
     $data->role_id = GenController::filter($req->role_id, "id");
     $data->save();
 

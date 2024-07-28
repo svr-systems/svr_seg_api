@@ -11,14 +11,14 @@ class TagController extends Controller {
   public function index() {
     try {
       return response()->json([
-        "success" => true,
-        "message" => "Registros retornados correctamente",
-        "data" => Tag::getAll()
+        "ok" => true,
+        "msg" => "Registros retornados correctamente",
+        "items" => Tag::getItems()
       ], 200);
     } catch (\Throwable $th) {
       return response()->json([
-        "success" => false,
-        "message" => "ERR. " . $th
+        "ok" => false,
+        "msg" => "ERR. " . $th
       ], 500);
     }
   }
@@ -32,7 +32,7 @@ class TagController extends Controller {
       return response()->json([
         "ok" => true,
         "msg" => "Registro retornado correctamente",
-        "data" => Tag::getItem($id)
+        "item" => Tag::getItem($id)
       ], 200);
     } catch (\Throwable $th) {
       return response()->json([
@@ -50,15 +50,15 @@ class TagController extends Controller {
   public function destroy($id) {
     DB::beginTransaction();
     try {
-      $data = Tag::find($id);
-      $data->active = false;
-      $data->save();
+      $item = Tag::find($id);
+      $item->active = false;
+      $item->save();
 
       DB::commit();
       return response()->json([
         "ok" => true,
         "msg" => "Registro eliminado correctamente",
-        "data" => $this->returnData($data)
+        "item" => Tag::getItem($item->id)
       ], 200);
     } catch (\Throwable $th) {
       DB::rollback();
@@ -79,30 +79,30 @@ class TagController extends Controller {
         ],
       );
 
-      $validator = $this->validateData($req, $id);
+      $valid_item = $this->validItem($req, $id);
 
-      if ($validator->fails()) {
+      if ($valid_item->fails()) {
         return response()->json([
           "ok" => false,
-          "msg" => $validator->errors()->first(),
-          "err" => $validator->errors()->first(),
+          "msg" => $valid_item->errors()->first(),
+          "err" => $valid_item->errors()->first(),
         ], 200);
       }
 
-      if (is_null($id)) {
-        $data = new Tag();
-        $data->created_by_id = $req->user()->id;
-      } else {
-        $data = Tag::find($id);
+      $item = Tag::find($id);
+
+      if (!$item) {
+        $item = new Tag();
+        $item->created_by_id = $req->user()->id;
       }
 
-      $data = $this->saveData($data, $req);
+      $item = $this->saveItem($item, $req);
 
       DB::commit();
       return response()->json([
         "ok" => true,
         "msg" => "Registro " . (is_null($id) ? "agregado" : "editado") . " correctamente",
-        "data" => $this->returnData($data)
+        "item" => Tag::getItem($item->id)
       ], 200);
     } catch (\Throwable $th) {
       DB::rollback();
@@ -114,7 +114,7 @@ class TagController extends Controller {
     }
   }
 
-  public function validateData($req, $id) {
+  public function validItem($req, $id) {
     $rules = [
       "name" => "string|required|min:2|max:30",
       "color" => "string|required|min:7|max:7",
@@ -129,21 +129,12 @@ class TagController extends Controller {
     );
   }
 
-  public function saveData($data, $req) {
-    $data->name = $req->name;
-    $data->color = GenController::filter($req->color, "U");
-    $data->updated_by_id = $req->user()->id;
-    $data->save();
+  public function saveItem($item, $req) {
+    $item->updated_by_id = $req->user()->id;
+    $item->name = $req->name;
+    $item->color = GenController::filter($req->color, "U");
+    $item->save();
 
-    return $data;
-  }
-  public function returnData($data) {
-    $data = [
-      "id" => $data->id,
-      "name" => $data->name,
-      "color" => $data->color
-    ];
-
-    return $data;
+    return $item;
   }
 }

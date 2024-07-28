@@ -16,6 +16,8 @@ class UserSeeder extends Seeder {
         "updated_by_id" => 1,
         "name" => "SVR",
         "first_surname" => "ADMIN",
+        "second_surname" => null,
+        "avatar" => null,
         "nickname" => "ADM-001",
         "email" => "admin@svrmexico.com",
         "password" => bcrypt("Hondo_1029*"),

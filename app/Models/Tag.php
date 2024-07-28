@@ -17,8 +17,8 @@ class Tag extends Model {
     'updated_at' => 'datetime:Y-m-d H:i:s',
   ];
 
-  static public function getAll() {
-    $data = Tag::
+  static public function getItems() {
+    $items = Tag::
       where('active', true)->
       get([
         'id',
@@ -26,15 +26,15 @@ class Tag extends Model {
         'color',
       ]);
 
-    foreach ($data as $key => $item) {
+    foreach ($items as $key => $item) {
       $item->key = $key;
     }
 
-    return $data;
+    return $items;
   }
 
   static public function getItem($id) {
-    $data = Tag::
+    $item = Tag::
       find($id, [
         'tags.id',
         'tags.created_at',
@@ -45,9 +45,9 @@ class Tag extends Model {
         'tags.color',
       ]);
 
-    $data->created_by = User::find($data->created_by_id, ['name']);
-    $data->updated_by = User::find($data->updated_by_id, ['name']);
+    $item->created_by = User::find($item->created_by_id, ['name']);
+    $item->updated_by = User::find($item->updated_by_id, ['name']);
 
-    return $data;
+    return $item;
   }
 }

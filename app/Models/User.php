@@ -27,8 +27,8 @@ class User extends Authenticatable {
     'updated_at' => 'datetime:Y-m-d H:i:s',
   ];
 
-  static public function getAll($req) {
-    $data = User::
+  static public function getItems($req) {
+    $items = User::
       join('roles', 'roles.id', 'users.role_id')->
       where('users.active', true)->
       where('users.id', '!=', $req->id)->
@@ -39,20 +39,22 @@ class User extends Authenticatable {
         'users.first_surname',
         'users.second_surname',
         'users.nickname',
+        'users.avatar',
         'users.email',
         'roles.name AS role_name'
       ]);
 
-    foreach ($data as $key => $item) {
+    foreach ($items as $key => $item) {
       $item->key = $key;
       $item->full_name = GenController::filter($item->name . " " . $item->first_surname . " " . $item->second_surname, "U");
+      $item->avatar_b64 = DocMgrController::getB64($item->avatar, "User");
     }
 
-    return $data;
+    return $items;
   }
 
   static public function getItem($id) {
-    $data = User::
+    $item = User::
       join('roles', 'roles.id', 'users.role_id')->
       find($id, [
         'users.id',
@@ -70,13 +72,13 @@ class User extends Authenticatable {
         'roles.name AS role_name',
       ]);
 
-    $data->created_by = User::find($data->created_by_id, ['name']);
-    $data->updated_by = User::find($data->updated_by_id, ['name']);
+    $item->created_by = User::find($item->created_by_id, ['name']);
+    $item->updated_by = User::find($item->updated_by_id, ['name']);
 
-    $data->avatar_doc = null;
-    $data->avatar_dlt = false;
-    $data->avatar_b64 = DocMgrController::getB64($data->avatar, "User");
-    
-    return $data;
+    $item->avatar_doc = null;
+    $item->avatar_dlt = false;
+    $item->avatar_b64 = DocMgrController::getB64($item->avatar, "User");
+
+    return $item;
   }
 }
